@@ -1,5 +1,8 @@
-package org.melchor.game;
+package org.melchor.game.util;
 
+/**
+ * 랜덤 숫자 배열을 생성하는 클래스입니다.
+ * */
 public class NumberGenerator {
 
     public static int[] generate(int size) {
