@@ -5,7 +5,7 @@ public class NumberGenerator {
     public static int[] generate(int size) {
         int[] numbers = new int[size];
         int pushedNumberCount = 0;
-        while (pushedNumberCount == size - 1) {
+        while (pushedNumberCount < size) {
             int newNumber = creteRandomNumber();
             if (isContain(numbers, newNumber)) {
                 continue;
@@ -13,7 +13,6 @@ public class NumberGenerator {
             numbers[pushedNumberCount] = newNumber;
             pushedNumberCount++;
         }
-
         return numbers;
     }
 
