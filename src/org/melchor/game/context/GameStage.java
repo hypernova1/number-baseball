@@ -1,4 +1,4 @@
-package org.melchor.game.util;
+package org.melchor.game.context;
 
 /**
  * 컴퓨터와 사용자의 숫자를 비교하고 결과를 확인하는 클래스입니다.
@@ -39,7 +39,7 @@ public class GameStage {
             sb.append(ball).append(" 볼 ");
         }
         if (gamerNumbers.length - strike - ball > 0) {
-            sb.append(out).append(" 아웃");
+            sb.append(out).append(" 아웃 ");
         }
         System.out.println(sb.toString() + "입니다.");
     }

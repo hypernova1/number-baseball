@@ -1,9 +1,9 @@
 package org.melchor.game.domain;
 
-import java.util.Arrays;
+import org.melchor.game.util.NumberUtil;
 
 /**
- * 사용자에 대한 클래스입니다. 선택된 숫자를 관리합니다.
+ * 사용자에 클래스입니다. 선택된 숫자를 관리합니다.
  */
 public class Gamer {
 
@@ -15,18 +15,22 @@ public class Gamer {
     }
 
     public boolean selectNumber(int newNumber) {
+        if (NumberUtil.isContain(numbers, newNumber)) {
+            System.out.println("이미 선택한 숫자입니다.");
+            return false;
+        }
+        pushNumber(newNumber);
+        return true;
+    }
+
+    private void pushNumber(int newNumber) {
         for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] == newNumber) {
-                System.out.println("이미 선택한 숫자입니다.");
-                return false;
-            }
             if (numbers[i] == 0) {
                 numbers[i] = newNumber;
                 selectedNumberCount++;
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     public int[] getNumbers() {

@@ -1,9 +1,7 @@
 package org.melchor.game.util;
 
 /**
- * Created by melchor
- * Date: 2020/11/13
- * Time: 4:39 PM
+ * 숫자에 관련된 유틸 클래스입니다.
  */
 public class NumberUtil {
 
@@ -11,11 +9,20 @@ public class NumberUtil {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            return 0;
+            return -1;
         }
     }
 
-    public static boolean isValidNumber(int number) {
+    public static boolean isContain(int[] numbers, int newNumber) {
+        for (int number : numbers) {
+            if (number == newNumber) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isValid(int number) {
         return number > 0 && number < 10;
     }
 
