@@ -31,35 +31,37 @@ public class GameStage {
         }
     }
 
-    public boolean isComplete() {
-        return this.strike == this.gamerNumbers.size();
+    private void compareNumber(int gamerNumber, int order) {
+        for (int i = 0; i < computerNumbers.size(); i++) {
+            int computerNumber = computerNumbers.get(i);
+
+            if (computerNumber == gamerNumber && i == order) {
+                this.strike++;
+                continue;
+            }
+            if (computerNumber == gamerNumber) {
+                this.ball++;
+            }
+        }
+        this.out = this.gamerNumbers.size() - this.strike - this.ball;
     }
 
     public void printResult() {
         StringBuilder sb = new StringBuilder();
         if (strike > 0) {
-            sb.append(strike).append(" 스트라이크 ");
+            sb.append(strike).append("스트라이크 ");
         }
         if (ball > 0) {
-            sb.append(ball).append(" 볼 ");
+            sb.append(ball).append("볼 ");
         }
         if (out > 0) {
-            sb.append(out).append(" 아웃 ");
+            sb.append(out).append("아웃 ");
         }
         System.out.println(sb.toString() + "입니다.");
     }
 
-    private void compareNumber(int gamerNumber, int order) {
-        for (int i = 0; i < computerNumbers.size(); i++) {
-            if (computerNumbers.get(i) == gamerNumber && i == order) {
-                this.strike++;
-                continue;
-            }
-            if (computerNumbers.get(i) == gamerNumber) {
-                this.ball++;
-            }
-        }
-        this.out = this.gamerNumbers.size() - this.strike - this.ball;
+    public boolean isComplete() {
+        return this.strike == this.gamerNumbers.size();
     }
 
     private boolean isNumbersLengthEquals(BaseBallNumbers computerNumbers, BaseBallNumbers gamerNumbers) {

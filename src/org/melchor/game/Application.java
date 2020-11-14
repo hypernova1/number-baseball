@@ -19,9 +19,9 @@ public class Application {
             GameExecutor.initComputer();
             GameExecutor.execute();
 
-            System.out.println("계임이 종료되었습니다. 다시 하시려면 Y를 입력하세요.");
-            String result = scanner.nextLine().toUpperCase();
-            if (!"Y".equals(result)) {
+            System.out.println("게임이 종료되었습니다. 다시 하시려면 Y를 입력하세요.");
+            String isContinue = scanner.nextLine().toUpperCase();
+            if (!"Y".equals(isContinue)) {
                 status = GameStatus.EXIT;
             }
         }

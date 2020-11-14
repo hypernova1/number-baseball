@@ -20,7 +20,6 @@ public class User implements Gamer {
 
     public void selectNumber(int number) {
         this.baseBallNumbers.push(number);
-
     }
 
     public boolean isAllSelected() {
