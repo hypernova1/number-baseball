@@ -1,8 +1,9 @@
 package org.melchor.game.context;
 
 import org.melchor.game.Application;
-import org.melchor.game.domain.Gamer;
-import org.melchor.game.util.NumberGenerator;
+import org.melchor.game.dto.BaseBallNumbers;
+import org.melchor.game.domain.Computer;
+import org.melchor.game.domain.User;
 import org.melchor.game.util.NumberUtil;
 
 /**
@@ -10,17 +11,18 @@ import org.melchor.game.util.NumberUtil;
  * */
 public class GameExecutor {
 
-    private static int[] computerNumbers;
+    private static final int NUMBER_SIZE = 3;
+    private static Computer computer;
 
-    public static void initComputerNumbers() {
-        computerNumbers = NumberGenerator.generate(3);
+    public static void initComputer() {
+        computer = new Computer(3);
     }
 
     public static void execute() {
         while (true) {
-            Gamer gamer = new Gamer(3);
-            selectNumbers(gamer);
-            boolean isEqual = compare(computerNumbers, gamer.getNumbers());
+            User user = new User(NUMBER_SIZE);
+            selectNumbers(user);
+            boolean isEqual = compare(computer.getBaseBallNumbers(), user.getBaseBallNumbers());
             if (isEqual) {
                 System.out.println("맞췄습니다!");
                 return;
@@ -28,16 +30,16 @@ public class GameExecutor {
         }
     }
 
-    private static boolean compare(int[] computerNumbers, int[] gamerNumbers) {
+    private static boolean compare(BaseBallNumbers computerNumbers, BaseBallNumbers gamerNumbers) {
         GameStage gameStage = new GameStage(computerNumbers, gamerNumbers);
         gameStage.compareNumbers();
         gameStage.printResult();
         return gameStage.isComplete();
     }
 
-    private static void selectNumbers(Gamer gamer) {
+    private static void selectNumbers(User user) {
         int no = 1;
-        while (!gamer.isAllSelected()) {
+        while (!user.isAllSelected()) {
             System.out.println(no + " 번째 숫자를 입력해주세요.");
             String input = Application.scanner.nextLine();
             int number = NumberUtil.parseNumber(input);
@@ -45,8 +47,8 @@ public class GameExecutor {
                 System.out.println("숫자는 1부터 9 사이의 값을 입력해주세요.");
                 continue;
             }
-            boolean result = gamer.selectNumber(number);
-            if (result) {
+            if (!user.isSelectedNumber(number)) {
+                user.selectNumber(number);
                 no++;
             }
         }

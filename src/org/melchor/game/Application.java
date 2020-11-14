@@ -16,7 +16,7 @@ public class Application {
 
     public static void main(String[] args) {
         while (status == GameStatus.CONTINUE) {
-            GameExecutor.initComputerNumbers();
+            GameExecutor.initComputer();
             GameExecutor.execute();
 
             System.out.println("계임이 종료되었습니다. 다시 하시려면 Y를 입력하세요.");
