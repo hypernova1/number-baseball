@@ -16,9 +16,7 @@ public class Application {
 
     public static void main(String[] args) {
         while (status == GameStatus.CONTINUE) {
-            GameExecutor.initComputer();
             GameExecutor.execute();
-
             System.out.println("게임이 종료되었습니다. 다시 하시려면 Y를 입력하세요.");
             String isContinue = scanner.nextLine().toUpperCase();
             if (!"Y".equals(isContinue)) {

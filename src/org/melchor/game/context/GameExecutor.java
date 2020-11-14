@@ -12,15 +12,11 @@ import org.melchor.game.util.NumberUtil;
 public class GameExecutor {
 
     private static final int NUMBER_SIZE = 3;
-    private static Computer computer;
-
-    public static void initComputer() {
-        computer = new Computer(3);
-    }
 
     public static void execute() {
+        Computer computer = new Computer(NUMBER_SIZE);
+        User user = new User(NUMBER_SIZE);
         while (true) {
-            User user = new User(NUMBER_SIZE);
             selectNumbers(user);
             boolean isEqual = compare(computer.getBaseBallNumbers(), user.getBaseBallNumbers());
             if (isEqual) {
