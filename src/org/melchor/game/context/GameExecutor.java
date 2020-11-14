@@ -1,7 +1,7 @@
 package org.melchor.game.context;
 
 import org.melchor.game.Application;
-import org.melchor.game.dto.BaseBallNumbers;
+import org.melchor.game.domain.Gamer;
 import org.melchor.game.domain.Computer;
 import org.melchor.game.domain.User;
 import org.melchor.game.util.NumberUtil;
@@ -11,15 +11,15 @@ import org.melchor.game.util.NumberUtil;
  * */
 public class GameExecutor {
 
-    private static final int NUMBER_SIZE = 3;
+    private static final int BASEBALL_NUMBER_SIZE = 3;
 
     public static void execute() {
-        Computer computer = new Computer(NUMBER_SIZE);
-        User user = new User(NUMBER_SIZE);
+        Computer computer = new Computer(BASEBALL_NUMBER_SIZE);
+        User user = new User(BASEBALL_NUMBER_SIZE);
         while (true) {
             selectNumbers(user);
-            boolean isEqual = compare(computer.getBaseBallNumbers(), user.getBaseBallNumbers());
-            if (isEqual) {
+            boolean isAllStrike = compare(computer, user);
+            if (isAllStrike) {
                 System.out.println("맞췄습니다!");
                 return;
             }
@@ -27,8 +27,8 @@ public class GameExecutor {
         }
     }
 
-    private static boolean compare(BaseBallNumbers computerNumbers, BaseBallNumbers gamerNumbers) {
-        GameStage gameStage = new GameStage(computerNumbers, gamerNumbers);
+    private static boolean compare(Computer computer, Gamer gamer) {
+        GameStage gameStage = new GameStage(computer, gamer);
         gameStage.compareNumbers();
         gameStage.printResult();
         return gameStage.isComplete();

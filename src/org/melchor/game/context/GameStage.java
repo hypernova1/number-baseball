@@ -1,15 +1,18 @@
 package org.melchor.game.context;
 
-import org.melchor.game.dto.BaseBallNumbers;
+import org.melchor.game.domain.Computer;
+import org.melchor.game.domain.Gamer;
 
 /**
  * 컴퓨터와 사용자의 숫자를 비교하고 결과를 확인하는 클래스입니다.
  * */
 public class GameStage {
 
-    private final BaseBallNumbers computerNumbers;
+    private static final int BASEBALL_NUMBER_SIZE = 3;
 
-    private final BaseBallNumbers gamerNumbers;
+    private final Computer computer;
+
+    private final Gamer gamer;
 
     private int strike;
 
@@ -17,23 +20,23 @@ public class GameStage {
 
     private int out;
 
-    public GameStage(BaseBallNumbers computerNumbers, BaseBallNumbers gamerNumbers) {
-        this.computerNumbers = computerNumbers;
-        this.gamerNumbers = gamerNumbers;
+    public GameStage(Computer computer, Gamer gamer) {
+        this.computer = computer;
+        this.gamer = gamer;
     }
 
     public void compareNumbers() {
-        if (!isNumbersLengthEquals(computerNumbers, gamerNumbers)) {
+        if (!isNumbersLengthEquals()) {
             System.out.println("길이가 같지 않아 비교할 수 없습니다.");
         }
-        for (int i = 0; i < gamerNumbers.size(); i++) {
-            compareNumber(gamerNumbers.get(i), i);
+        for (int i = 0; i < BASEBALL_NUMBER_SIZE; i++) {
+            compareNumber(gamer.getBaseBallNumbers().get(i), i);
         }
     }
 
     private void compareNumber(int gamerNumber, int order) {
-        for (int i = 0; i < computerNumbers.size(); i++) {
-            int computerNumber = computerNumbers.get(i);
+        for (int i = 0; i < BASEBALL_NUMBER_SIZE; i++) {
+            int computerNumber = computer.getBaseBallNumbers().get(i);
 
             if (computerNumber == gamerNumber && i == order) {
                 this.strike++;
@@ -43,28 +46,28 @@ public class GameStage {
                 this.ball++;
             }
         }
-        this.out = this.gamerNumbers.size() - this.strike - this.ball;
+        this.out = BASEBALL_NUMBER_SIZE - this.strike - this.ball;
     }
 
     public void printResult() {
         StringBuilder sb = new StringBuilder();
-        if (strike > 0) {
-            sb.append(strike).append("스트라이크 ");
+        if (this.strike > 0) {
+            sb.append(this.strike).append("스트라이크 ");
         }
         if (ball > 0) {
-            sb.append(ball).append("볼 ");
+            sb.append(this.ball).append("볼 ");
         }
         if (out > 0) {
-            sb.append(out).append("아웃 ");
+            sb.append(this.out).append("아웃 ");
         }
         System.out.println(sb.toString() + "입니다.");
     }
 
     public boolean isComplete() {
-        return this.strike == this.gamerNumbers.size();
+        return this.strike == BASEBALL_NUMBER_SIZE;
     }
 
-    private boolean isNumbersLengthEquals(BaseBallNumbers computerNumbers, BaseBallNumbers gamerNumbers) {
-        return computerNumbers.size() == gamerNumbers.size();
+    private boolean isNumbersLengthEquals() {
+        return this.computer.getBaseBallNumbers().size() == this.computer.getBaseBallNumbers().size();
     }
 }

@@ -23,7 +23,7 @@ public class User implements Gamer {
     }
 
     public boolean isAllSelected() {
-        return baseBallNumbers.isFull();
+        return this.baseBallNumbers.isFull();
     }
 
     public boolean isSelectedNumber(int number) {
@@ -31,6 +31,6 @@ public class User implements Gamer {
     }
 
     public void clearNumber() {
-        baseBallNumbers.removeAll();
+        this.baseBallNumbers.removeAll();
     }
 }
