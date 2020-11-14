@@ -29,4 +29,8 @@ public class User implements Gamer {
     public boolean isSelectedNumber(int number) {
         return this.baseBallNumbers.isExist(number);
     }
+
+    public void clearNumber() {
+        baseBallNumbers.removeAll();
+    }
 }

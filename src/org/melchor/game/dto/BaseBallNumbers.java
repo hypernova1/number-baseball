@@ -1,5 +1,7 @@
 package org.melchor.game.dto;
 
+import java.util.Arrays;
+
 /**
  * 야구 게임의 숫자를 관리하는 클래스입니다.
  */
@@ -57,8 +59,11 @@ public class BaseBallNumbers {
         return result;
     }
 
+    public void removeAll() {
+        Arrays.fill(numbers, 0);
+    }
+
     public boolean isFull() {
         return this.numbers.length == size();
     }
-
 }

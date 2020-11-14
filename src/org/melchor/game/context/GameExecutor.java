@@ -23,6 +23,7 @@ public class GameExecutor {
                 System.out.println("맞췄습니다!");
                 return;
             }
+            user.clearNumber();
         }
     }
 
